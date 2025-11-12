@@ -9,16 +9,15 @@ namespace MeetingRoomBooking.Api.Controllers
     [ApiController]
     public class RoomController(IMediator _mediator) : ControllerBase
     {
-
+        [HttpPost("Book")]
         public async Task<IActionResult> Book(Guid roomId,[FromBody] BookRequest request , CancellationToken cancellationToken)
         {
             var command = new BookRoomCommand
             {
                 RoomId = roomId,
-                Start = request.start,
-                End = request.end
+                Start = request.Start,
+                End = request.End
             };
-
             try
             {
                 bool result = await _mediator.Send(command, cancellationToken);
@@ -29,18 +28,13 @@ namespace MeetingRoomBooking.Api.Controllers
             }
             catch (ArgumentException ex)
             {
-
                 return BadRequest(new { Error = ex.Message });
             }
-
             catch(Exception ex)
             {
                 return NotFound(new { Error = ex.Message });
             }
         }
-
-
     }
-    
-    public sealed record BookRequest(DateTimeOffset start,DateTimeOffset end);
+    public sealed record BookRequest(DateTimeOffset Start,DateTimeOffset End);
 }

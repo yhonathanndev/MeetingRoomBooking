@@ -1,5 +1,10 @@
+using MeetingRoomBooking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("dbCompanyABC"))
+    );
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -25,6 +25,10 @@ public sealed class RoomConfiguration : IEntityTypeConfiguration<Room>
             nb.HasIndex(n => n.Value).IsUnique();
         });
 
+        room.Property(r=> r.Enabled)
+            .HasColumnName("enabled")
+            .IsRequired();
+
         room.HasMany(r => r.Bookings)
             .WithOne()
             .HasForeignKey(b => b.RoomId)

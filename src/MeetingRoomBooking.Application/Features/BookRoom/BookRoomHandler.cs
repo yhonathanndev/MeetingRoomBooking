@@ -6,8 +6,6 @@ namespace MeetingRoomBooking.Application.Features.BookRoom;
 
 public sealed class BookRoomHandler(IRoomRepository _roomRepository) : IRequestHandler<BookRoomCommand, bool>
 {
-
-
     public async Task<bool> Handle(BookRoomCommand request, CancellationToken cancellationToken)
     {
         var room = await _roomRepository.GetByIdAsync(request.RoomId,cancellationToken) ?? throw new("Room not found");

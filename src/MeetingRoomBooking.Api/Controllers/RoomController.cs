@@ -1,5 +1,7 @@
 using MediatR;
 using MeetingRoomBooking.Application.Features.BookRoom;
+using MeetingRoomBooking.Application.Features.Rooms;
+using MeetingRoomBooking.Application.Features.Rooms.Queries.GetRooms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,13 @@ namespace MeetingRoomBooking.Api.Controllers
     [ApiController]
     public class RoomController(IMediator _mediator) : ControllerBase
     {
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<RoomDto>>> GetRooms(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new GetRoomsQuery(), cancellationToken);
+            return Ok(result);
+        }
+
         [HttpPost("Book")]
         public async Task<IActionResult> Book(Guid roomId,[FromBody] BookRequest request , CancellationToken cancellationToken)
         {

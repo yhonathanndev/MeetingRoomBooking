@@ -5,6 +5,7 @@ public sealed class Room
 {
     public Guid Id { get; private set; }
     public RoomName Name { get; private set; }
+    public bool Enabled { get; private set; } = true;
     private readonly List<Booking> _bookings = [];
     public IReadOnlyList<Booking> Bookings => _bookings;
 
@@ -13,6 +14,7 @@ public sealed class Room
         ArgumentNullException.ThrowIfNull(name);
         Id = id;
         Name = name;
+        Enabled = true;
     }
     private Room() { } //Required by EF Core
 
@@ -28,6 +30,8 @@ public sealed class Room
         return true;
     }
 
+    public void Enable()=> Enabled = true;
+    public void Disable()=> Enabled = false;
     
 
 }

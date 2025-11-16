@@ -1,8 +1,9 @@
 using MediatR;
+using MeetingRoomBooking.Application.Features.Rooms.Commands;
 using MeetingRoomBooking.Domain.Interfaces;
 using MeetingRoomBooking.Domain.ValueObjects;
 
-namespace MeetingRoomBooking.Application.Features.BookRoom;
+namespace MeetingRoomBooking.Application.Features.Rooms.Commands.BookRoom;
 
 public sealed class BookRoomHandler(IRoomRepository _roomRepository) : IRequestHandler<BookRoomCommand, bool>
 {

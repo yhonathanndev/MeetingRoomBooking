@@ -32,6 +32,12 @@ public sealed class Room
 
     public void Enable()=> Enabled = true;
     public void Disable()=> Enabled = false;
+
+    public void Rename(RoomName newName)
+    {
+        ArgumentNullException.ThrowIfNull(newName);
+        Name= newName;
+    }
     
 
 }
